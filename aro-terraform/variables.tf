@@ -1,3 +1,23 @@
+variable "arm_client_id" {
+	description = "Azure service principal client ID"
+	type        = string
+}
+
+variable "arm_client_secret" {
+	description = "Azure service principal client secret"
+	type        = string
+	sensitive   = true
+}
+
+variable "arm_tenant_id" {
+	description = "Azure tenant ID"
+	type        = string
+}
+
+variable "arm_subscription_id" {
+	description = "Azure subscription ID"
+	type        = string
+}
 variable "clusters" {
 	description = "List of cluster objects to deploy."
 	type = list(object({
