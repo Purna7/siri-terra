@@ -1,0 +1,10 @@
+variable "resource_group_name" { type = string }
+variable "location" { type = string }
+variable "cluster_name" { type = string }
+variable "vnet_name" { type = string }
+variable "subnet_id" { type = string }
+variable "pull_secret" { type = string }
+variable "domain" { type = string }
+variable "aad_client_id" { type = string }
+variable "aad_client_secret" { type = string }
+variable "aad_tenant_id" { type = string }
