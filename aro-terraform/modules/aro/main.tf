@@ -1,4 +1,4 @@
-resource "azurerm_red_hat_openshift_cluster" "aro" {
+resource "azurerm_redhat_openshift_cluster" "aro" {
   name                = var.cluster_name
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -18,3 +18,4 @@ resource "azurerm_red_hat_openshift_cluster" "aro" {
     subnet_id = var.subnet_id
   }
 }
+
