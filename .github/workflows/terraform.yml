@@ -24,6 +24,7 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
       PULL_SECRET: ${{ secrets.PULL_SECRET }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,19 +38,22 @@ jobs:
         run: terraform fmt -check -recursive
         working-directory: ./aro-terraform
 
-      - name: Terraform Validate
-        run: terraform validate
-        working-directory: ./aro-terraform
-
+      # ✅ INIT MUST COME BEFORE VALIDATE
       - name: Terraform Init
         run: terraform init
         working-directory: ./aro-terraform
 
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: ./aro-terraform
+
       - name: Terraform Plan
-        run: terraform plan -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars"
+        run: terraform plan \
+          -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars"
         working-directory: ./aro-terraform
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars"
+        run: terraform apply -auto-approve \
+          -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars"
         working-directory: ./aro-terraform
