@@ -20,8 +20,8 @@ clusters = [
     subnet_prefix     = "10.0.1.0/24"
     pull_secret       = "dfbfbgfn" # Set this to your pull secret or use environment variable in your Terraform code
     domain            = "dev1.example.com"
-    aad_client_id     = "0ec0ad90-d8d8-43c1-9a05-d5c2352aae44"     # Set via secret or environment variable
-    aad_client_secret = "5XE8Q~rFpjB0mzfXB-ukhaiUmDTf73FRHL_UVa3I" # Set via secret or environment variable
-    aad_tenant_id     = "ffdef3a4-6f16-4a1b-8401-39239d1b4f31"     # Set via secret or environment variable
+    # aad_client_id     = "0ec0ad90-d8d8-43c1-9a05-d5c2352aae44"     # Set via secret or environment variable
+    # aad_client_secret = "5XE8Q~rFpjB0mzfXB-ukhaiUmDTf73FRHL_UVa3I" # Set via secret or environment variable
+    # aad_tenant_id     = "ffdef3a4-6f16-4a1b-8401-39239d1b4f31"     # Set via secret or environment variable
   }
 ]
