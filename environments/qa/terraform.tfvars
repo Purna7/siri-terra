@@ -22,8 +22,8 @@ clusters = [
     subnet_prefix     = "10.1.3.0/24"
     pull_secret       = "<replace-with-pull-secret>"
     domain            = "qa2.example.com"
-    aad_client_id     = "<replace-with-client-id>"
-    aad_client_secret = "<replace-with-client-secret>"
-    aad_tenant_id     = "<replace-with-tenant-id>"
+    # aad_client_id     = "<replace-with-client-id>"
+    # aad_client_secret = "<replace-with-client-secret>"
+    # aad_tenant_id     = "<replace-with-tenant-id>"
   }
 ]

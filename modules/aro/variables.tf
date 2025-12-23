@@ -3,17 +3,17 @@ variable "location" { type = string }
 variable "cluster_name" { type = string }
 variable "vnet_name" { type = string }
 variable "subnet_id" { type = string }
-variable "pull_secret" {
-  type      = string
-  sensitive = true
-}
+# variable "pull_secret" {
+#   type      = string
+#   sensitive = true
+# }
 variable "domain" { type = string }
-variable "aad_client_id" { type = string }
-variable "aad_client_secret" {
-  type      = string
-  sensitive = true
-}
-variable "aad_tenant_id" { type = string }
+# variable "aad_client_id" { type = string }
+# variable "aad_client_secret" {
+#   type      = string
+#   sensitive = true
+# }
+# variable "aad_tenant_id" { type = string }
 
 variable "openshift_version" {
   type    = string

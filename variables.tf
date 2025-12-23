@@ -71,33 +71,33 @@ variable "clusters" {
     subnet_prefix     = string
     pull_secret       = optional(string)
     domain            = string
-    aad_client_id     = optional(string)
-    aad_client_secret = optional(string)
-    aad_tenant_id     = optional(string)
+    # aad_client_id     = optional(string)
+    # aad_client_secret = optional(string)
+    # aad_tenant_id     = optional(string)
   }))
 }
 
-variable "pull_secret" {
-  description = "ARO pull secret (fallback if not set in cluster object)"
-  type        = string
-  sensitive   = true
-  default     = null
-}
-variable "aad_client_id" {
-  description = "AAD client id (fallback if not set in cluster object)"
-  type        = string
-  sensitive   = true
-  default     = null
-}
-variable "aad_client_secret" {
-  description = "AAD client secret (fallback if not set in cluster object)"
-  type        = string
-  sensitive   = true
-  default     = null
-}
-variable "aad_tenant_id" {
-  description = "AAD tenant id (fallback if not set in cluster object)"
-  type        = string
-  sensitive   = true
-  default     = null
-}
+# variable "pull_secret" {
+#   description = "ARO pull secret (fallback if not set in cluster object)"
+#   type        = string
+#   sensitive   = true
+#   default     = null
+# }
+# variable "aad_client_id" {
+#   description = "AAD client id (fallback if not set in cluster object)"
+#   type        = string
+#   sensitive   = true
+#   default     = null
+# }
+# variable "aad_client_secret" {
+#   description = "AAD client secret (fallback if not set in cluster object)"
+#   type        = string
+#   sensitive   = true
+#   default     = null
+# }
+# variable "aad_tenant_id" {
+#   description = "AAD tenant id (fallback if not set in cluster object)"
+#   type        = string
+#   sensitive   = true
+#   default     = null
+# }
