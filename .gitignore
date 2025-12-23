@@ -1,0 +1,8 @@
+# Terraform
+.terraform/
+terraform
+terraform.exe
+terraform_*
+*.tfstate
+*.tfstate.*
+.crash.log
