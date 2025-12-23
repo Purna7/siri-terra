@@ -55,7 +55,7 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           # PULL_SECRET: ${{ secrets.PULL_SECRET }}
         run: |
-          terraform plan \
+          terraform plan -lock=false \
             -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars" \
             -out=tfplan
 
