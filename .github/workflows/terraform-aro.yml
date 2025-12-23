@@ -53,7 +53,7 @@ jobs:
           ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          PULL_SECRET: ${{ secrets.PULL_SECRET }}
+          # PULL_SECRET: ${{ secrets.PULL_SECRET }}
         run: |
           terraform plan \
             -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars" \
