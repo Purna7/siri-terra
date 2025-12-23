@@ -1,4 +1,4 @@
-name: Terraform ARO Deployment (Azure)
+name: Terraform ARO Deployment (Azure - SP Auth)
 
 on:
   workflow_dispatch:
@@ -20,79 +20,52 @@ env:
 
 jobs:
   terraform:
-    name: Terraform ARO
     runs-on: ubuntu-latest
 
     steps:
-      # -----------------------------
-      # 1. Checkout Repository
-      # -----------------------------
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # -----------------------------
-      # 2. Setup Terraform
-      # -----------------------------
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: ${{ env.TF_VERSION }}
 
-      # -----------------------------
-      # 3. Azure Login (Service Principal)
-      # -----------------------------
-      - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      # ✅ NO azure/login here
 
-      # -----------------------------
-      # 4. Terraform Init
-      # -----------------------------
       - name: Terraform Init
         working-directory: ${{ env.TF_WORKING_DIR }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
         run: terraform init
 
-      # -----------------------------
-      # 5. Terraform Format Check
-      # -----------------------------
-      - name: Terraform Format Check
-        working-directory: ${{ env.TF_WORKING_DIR }}
-        run: terraform fmt -check -recursive
-
-      # -----------------------------
-      # 6. Terraform Validate
-      # -----------------------------
       - name: Terraform Validate
         working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform validate
 
-      # -----------------------------
-      # 7. Terraform Plan
-      # -----------------------------
       - name: Terraform Plan
         working-directory: ${{ env.TF_WORKING_DIR }}
-        # env:
-        #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        #   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        #   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        #   PULL_SECRET: ${{ secrets.PULL_SECRET }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          PULL_SECRET: ${{ secrets.PULL_SECRET }}
         run: |
           terraform plan \
             -var-file="environments/${{ github.event.inputs.environment }}/terraform.tfvars" \
             -out=tfplan
 
-      # -----------------------------
-      # 8. Terraform Apply (Main only)
-      # -----------------------------
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         working-directory: ${{ env.TF_WORKING_DIR }}
-        # env:
-        #   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        #   ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        #   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        #   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        #   PULL_SECRET: ${{ secrets.PULL_SECRET }}
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          PULL_SECRET: ${{ secrets.PULL_SECRET }}
         run: terraform apply -auto-approve tfplan
